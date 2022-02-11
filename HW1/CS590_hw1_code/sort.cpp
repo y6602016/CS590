@@ -1,7 +1,8 @@
 #include <cstdio>
 #include <cstdlib>
-
+#include <iostream>
 #include "sort.h"
+using namespace std;
 
 int ivector_length(int *v, int n)
 {
@@ -42,6 +43,43 @@ void insertion_sort(int **A, int n, int l, int r)
  */
 void insertion_sort_im(int **A, int n, int l, int r)
 {
+  // precompute the vector's length and store their length in an array
+  int vector_length[r + 1]; // declare an array to store all vector's length
+
+  for (int i = l; i <= r; i++)
+  {
+    vector_length[i] = ivector_length(A[i], n); // call ivector_length() to calaculate A[i]'s length
+  }
+
+  // now vector_length[] stores all vector's length of A, we can access it by an index in insertion sort
+  int i;
+  int *key;
+  int key_length;
+
+  for (int j = l + 1; j <= r; j++)
+  {
+    key = A[j];
+
+    // use the key_length variable to store the length of the key
+    key_length = vector_length[j];
+
+    i = j - 1;
+
+    while ((i >= l) && (vector_length[i] > key_length)) // get the vector's length via accessing the vector_length array
+    {
+      A[i + 1] = A[i];
+
+      // update vector_length[i + 1] as well
+      vector_length[i + 1] = vector_length[i];
+
+      i = i - 1;
+    }
+
+    // update vector_length[i + 1] with key_length
+    vector_length[i + 1] = key_length;
+
+    A[i + 1] = key;
+  }
 }
 
 /*

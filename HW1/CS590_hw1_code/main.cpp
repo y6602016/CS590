@@ -74,12 +74,12 @@ int main(int argc, char *argv[])
   /*
    * output the first 20 elements for debugging purposes
    */
-  //  for (int i = 0; (i < m) && (i < 20); i++)
-  //  {
+  // for (int i = 0; (i < m) && (i < 20); i++)
+  // {
   //   cout << "[ ";
   //   for (int j = 0; j < n; j++)
-  //    cout << input_array[i][j] << " ";
-  //  cout << "]" << endl;
+  //     cout << input_array[i][j] << " ";
+  //   cout << "]" << endl;
   // }
   // cout << endl;
 
@@ -133,8 +133,8 @@ int main(int argc, char *argv[])
   // {
   //   cout << "[ ";
   //   for (int j = 0; j < n; j++)
-  //    cout << input_array[i][j] << " ";
-  //  cout << "]" << endl;
+  //     cout << input_array[i][j] << " ";
+  //   cout << "]" << endl;
   // }
   // cout << endl;
 

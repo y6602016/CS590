@@ -96,8 +96,7 @@ void merge_sort(int **A, int n, int p, int r)
     vector_length[i] = ivector_length(A[i], n); // call ivector_length() to calaculate A[i]'s length
   }
 
-  cout << endl;
-  // _merge_sort() is the entry point of the merge_sort with vector_length
+  // call _merge_sort() to implement the merge sort algorithm with vector_length
   _merge_sort(A, vector_length, p, r);
 }
 

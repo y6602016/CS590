@@ -1,3 +1,4 @@
 *.out
 Makefile
 .vscode
+.DS_Store

@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <math.h>
 #include "sort.h"
 using namespace std;
 
@@ -87,6 +88,84 @@ void insertion_sort_im(int **A, int n, int l, int r)
  */
 void merge_sort(int **A, int n, int p, int r)
 {
+  // precompute the vector's length and store their length in an array
+  int vector_length[r + 1]; // declare an array to store all vector's length
+
+  for (int i = p; i <= r; i++)
+  {
+    vector_length[i] = ivector_length(A[i], n); // call ivector_length() to calaculate A[i]'s length
+  }
+
+  cout << endl;
+  // _merge_sort() is the entry point of the merge_sort with vector_length
+  _merge_sort(A, vector_length, p, r);
+}
+
+/*
+ *   _merge_sort() function
+ */
+void _merge_sort(int **A, int *vector_length, int p, int r)
+{
+  if (p < r)
+  {
+    int q = int(floor((p + r) / 2));
+    _merge_sort(A, vector_length, p, q);
+    _merge_sort(A, vector_length, q + 1, r);
+    merge(A, vector_length, p, q, r);
+  }
+}
+
+/*
+ *   merge() fuinction
+ */
+void merge(int **A, int *vector_lengh, int p, int q, int r)
+{
+  // mid point(q) is included in the left side
+  int n1 = q - p + 1;
+  int n2 = r - q;
+
+  // L stores left side of vector_lenth, A_L stores left side of A
+  int L[n1 + 1];
+  int *A_L[n1 + 1];
+
+  // R stores right side of vector_lenth, A_R stores right side of A
+  int R[n2 + 1];
+  int *A_R[n2 + 1];
+
+  // left side index = p + i
+  for (int i = 0; i < n1; i++)
+  {
+    L[i] = vector_lengh[p + i];
+    A_L[i] = A[p + i];
+  }
+
+  // right side start from q + 1, mid point is included in left side, not in right side
+  for (int i = 0; i < n2; i++)
+  {
+    R[i] = vector_lengh[q + 1 + i];
+    A_R[i] = A[q + 1 + i];
+  }
+
+  L[n1] = INT32_MAX;
+  R[n2] = INT32_MAX;
+
+  int i = 0;
+  int j = 0;
+  for (int k = p; k <= r; k++)
+  {
+    if (L[i] <= R[j])
+    { // update vector_length and A
+      vector_lengh[k] = L[i];
+      A[k] = A_L[i];
+      i += 1;
+    }
+    else
+    { // update vector_length and A
+      vector_lengh[k] = R[j];
+      A[k] = A_R[j];
+      j += 1;
+    }
+  }
 }
 
 /*

@@ -110,6 +110,14 @@ void _merge_sort(int **A, int *vector_length, int p, int r)
     int q = int(floor((p + r) / 2));
     _merge_sort(A, vector_length, p, q);
     _merge_sort(A, vector_length, q + 1, r);
+
+    // // optimized to achieve O(m) for best case
+    // if (A[q] > A[q + 1])
+    // {
+    //   merge(A, vector_length, p, q, r);
+    // }
+    // // optimized for best case to achieve O(m)
+
     merge(A, vector_length, p, q, r);
   }
 }

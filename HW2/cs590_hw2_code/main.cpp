@@ -5,9 +5,8 @@
 #include "timer.h"
 #include "random_generator.h"
 
-
-int main(int argc, char* argv[])
-{ 
+int main(int argc, char *argv[])
+{
 	random_generator rg;
 	timer t;
 	int n, m, algo;
@@ -20,7 +19,7 @@ int main(int argc, char* argv[])
 	 * check arguments
 	 */
 	if (argc > 1)
-	{ 
+	{
 		n = atoi(argv[1]);
 		n = (n < 1) ? 1 : n;
 	}
@@ -47,10 +46,10 @@ int main(int argc, char* argv[])
 	/*
 	 * allocate and generate random strings
 	 */
-	char** input_array;
-	int* input_length;
+	char **input_array;
+	int *input_length;
 
-	input_array = new char*[n];
+	input_array = new char *[n];
 	input_length = new int[n];
 
 	t.start();
@@ -71,9 +70,10 @@ int main(int argc, char* argv[])
 	{
 		cout << "Running radix sort with insertion sort algorithm: " << endl;
 		t.start();
+		// insertion_sort_digit(input_array, input_length, 0, n - 1, 1);
 		radix_sort_is(input_array, input_length, n, m);
 		t.stop();
-	} 
+	}
 	else
 	{
 		cout << "Running radix sort with counting sort algorithm: " << endl;
@@ -87,14 +87,14 @@ int main(int argc, char* argv[])
 	/*
 	 * check output
 	 */
-	if (check_sorted(input_array, 0, n-1))
+	if (check_sorted(input_array, 0, n - 1))
 		cout << "The output is sorted!" << endl;
 	else
 		cout << "ERROR: The output is not sorted!" << endl;
 
-	  // for (int i = 0; (i < n) && (i < 20); i++)
-	  //   cout << input_array[i] << endl;
-	  // cout << endl;
+	// for (int i = 0; (i < n) && (i < 20); i++)
+	//   cout << input_array[i] << endl;
+	// cout << endl;
 
 	/*
 	 * free allocated storage
@@ -106,4 +106,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-

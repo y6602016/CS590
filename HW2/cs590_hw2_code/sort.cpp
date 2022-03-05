@@ -65,16 +65,16 @@ void insertion_sort(char **A, int l, int r)
 void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
 {
   // for debugging
-  for (int i = 0; i <= r; i++)
-  {
-    for (int j = 0; j < A_len[i]; j++)
-    {
-      cout << A[i][j];
-    }
+  // for (int i = 0; i <= r; i++)
+  // {
+  //   for (int j = 0; j < A_len[i]; j++)
+  //   {
+  //     cout << A[i][j];
+  //   }
 
-    cout << " " << endl;
-  }
-  cout << "============" << endl;
+  //   cout << " " << endl;
+  // }
+  // cout << "============" << endl;
 
   // sort the strings in A array according to the chat at position d
   // ex: A["ayc", "def", "dag"], d = 1 => sorted: A["dag", "def", "ayc"]
@@ -156,17 +156,16 @@ void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
   }
 
   // for debugging
-  for (int i = 0; i <= r; i++)
-  {
-    for (int j = 0; j < A_len[i]; j++)
-    {
-      cout << A[i][j];
-    }
+  // for (int i = 0; i <= r; i++)
+  // {
+  //   for (int j = 0; j < A_len[i]; j++)
+  //   {
+  //     cout << A[i][j];
+  //   }
 
-    cout << " " << endl;
-  }
-
-  cout << "=======end========" << endl;
+  //   cout << " " << endl;
+  // }
+  // cout << "=======end========" << endl;
 }
 
 void counting_sort_digit(char **A, int *A_len, char **B, int *B_len, int n, int d)
@@ -175,6 +174,7 @@ void counting_sort_digit(char **A, int *A_len, char **B, int *B_len, int n, int 
 
 void radix_sort_is(char **A, int *A_len, int n, int m)
 {
+  // do insertion sort from the rightmost digit to leftmost digit
   for (int d = m - 1; d >= 0; d--)
   {
     insertion_sort_digit(A, A_len, 0, n - 1, d);

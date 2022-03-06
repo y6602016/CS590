@@ -15,28 +15,22 @@ int string_compare(char *s1, char *s2)
    */
   int i;
 
-  // test
-  // cout << "test " << s1[0] << " " << s2[0] << endl;
-
   i = 0;
   while ((s1[i] != 0) && (s2[i] != 0) && (s1[i] == s2[i]))
     i++;
 
   if (s1[i] == s2[i])
   {
-    // cout << "test 0" << endl;
     return 0;
   }
   else
   {
     if (s1[i] < s2[i])
     {
-      // cout << "test -1" << endl;
       return -1;
     }
     else
     {
-      // cout << "test 1" << endl;
       return 1;
     }
   }
@@ -69,8 +63,8 @@ void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
   // if d doesn't exist in a string, then string[d] = 0
   int i;
   char *key_string;
-  char *key_char;
-  char *compared;
+  char key_char;
+  char compared;
   int string_len;
   int string_len2;
 
@@ -86,13 +80,12 @@ void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
     if (d >= string_len)
     {
       // if not exist, key_char = 0
-      key_char = new char[1];
-      key_char[0] = 0;
+      key_char = 0;
     }
     else
     {
       // if exists, key_char = A[j] + d pointer
-      key_char = A[j] + d;
+      key_char = A[j][d];
     }
 
     // initialize i
@@ -104,15 +97,14 @@ void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
     // // check d position exists or not
     if (d >= string_len2)
     {
-      compared = new char[1];
-      compared[0] = 0;
+      compared = 0;
     }
     else
     {
-      compared = A[i] + d;
+      compared = A[i][d];
     }
 
-    while ((i >= l) && (string_compare(compared, key_char) > 0))
+    while ((i >= l) && (compared > key_char))
     {
       // move A[i] right
       A[i + 1] = A[i];
@@ -128,12 +120,11 @@ void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
         string_len2 = A_len[i];
         if (d >= string_len2)
         {
-          compared = new char[1];
-          compared[0] = 0;
+          compared = 0;
         }
         else
         {
-          compared = A[i] + d;
+          compared = A[i][d];
         }
       }
     }

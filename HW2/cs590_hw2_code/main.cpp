@@ -70,7 +70,6 @@ int main(int argc, char *argv[])
 	{
 		cout << "Running radix sort with insertion sort algorithm: " << endl;
 		t.start();
-		// insertion_sort_digit(input_array, input_length, 0, n - 1, 1);
 		radix_sort_is(input_array, input_length, n, m);
 		t.stop();
 	}

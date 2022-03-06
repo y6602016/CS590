@@ -64,18 +64,6 @@ void insertion_sort(char **A, int l, int r)
 
 void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
 {
-  // for debugging
-  // for (int i = 0; i <= r; i++)
-  // {
-  //   for (int j = 0; j < A_len[i]; j++)
-  //   {
-  //     cout << A[i][j];
-  //   }
-
-  //   cout << " " << endl;
-  // }
-  // cout << "============" << endl;
-
   // sort the strings in A array according to the chat at position d
   // ex: A["ayc", "def", "dag"], d = 1 => sorted: A["dag", "def", "ayc"]
   // if d doesn't exist in a string, then string[d] = 0
@@ -154,35 +142,114 @@ void insertion_sort_digit(char **A, int *A_len, int l, int r, int d)
     A[i + 1] = key_string;
     A_len[i + 1] = string_len;
   }
-
-  // for debugging
-  // for (int i = 0; i <= r; i++)
-  // {
-  //   for (int j = 0; j < A_len[i]; j++)
-  //   {
-  //     cout << A[i][j];
-  //   }
-
-  //   cout << " " << endl;
-  // }
-  // cout << "=======end========" << endl;
 }
 
 void counting_sort_digit(char **A, int *A_len, char **B, int *B_len, int n, int d)
 {
+  int c[256];
+
+  // initialize the c array
+  for (int i = 0; i < 256; i++)
+  {
+    c[i] = 0;
+  }
+
+  int key_char;
+  int string_len;
+
+  // populate the c array
+  for (int i = 0; i <= n; i++)
+  {
+    string_len = A_len[i];
+    if (d >= string_len)
+    {
+      // if not exist, key_char = 0
+      key_char = 0;
+    }
+    else
+    {
+      // if exists, key_char = A[j] + d pointer
+      key_char = A[i][d];
+    }
+    c[key_char] += 1;
+  }
+
+  // accumulate the index, c[i] means the last i value in B array at c[i] - 1 index
+  for (int i = 1; i < 256; i++)
+  {
+    c[i] += c[i - 1];
+  }
+
+  for (int i = n; i >= 0; i--)
+  {
+    string_len = A_len[i];
+    if (d >= string_len)
+    {
+      // if not exist, key_char = 0
+      key_char = 0;
+    }
+    else
+    {
+      key_char = A[i][d];
+    }
+
+    B[c[key_char] - 1] = A[i];
+    B_len[c[key_char] - 1] = string_len;
+    c[key_char] -= 1;
+  }
 }
 
 void radix_sort_is(char **A, int *A_len, int n, int m)
 {
+  // for debugging
+  for (int i = 0; i < n; i++)
+  {
+    cout << A[i] << endl;
+  }
+  cout << "---------" << endl;
+
   // do insertion sort from the rightmost digit to leftmost digit
   for (int d = m - 1; d >= 0; d--)
   {
     insertion_sort_digit(A, A_len, 0, n - 1, d);
   }
+
+  // for debugging
+  for (int i = 0; i < n; i++)
+  {
+    cout << A[i] << endl;
+  }
+  cout << "---------" << endl;
 }
 
 void radix_sort_cs(char **A, int *A_len, int n, int m)
 {
+  // for debugging
+  for (int i = 0; i < n; i++)
+  {
+    cout << A[i] << endl;
+  }
+  cout << "---------" << endl;
+
+  char **B = new char *[n];
+  int *B_len = new int[n];
+
+  for (int d = m - 2; d >= 0; d--)
+  {
+    counting_sort_digit(A, A_len, B, B_len, n - 1, d);
+
+    for (int x = 0; x < n; x++)
+    {
+      A[x] = B[x];
+      A_len[x] = B_len[x];
+    }
+  }
+
+  // for debugging
+  for (int i = 0; i < n; i++)
+  {
+    cout << A[i] << endl;
+  }
 }
 
 /*

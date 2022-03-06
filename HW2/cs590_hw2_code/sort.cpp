@@ -204,12 +204,13 @@ void radix_sort_is(char **A, int *A_len, int n, int m)
   // for debugging
   for (int i = 0; i < n; i++)
   {
-    cout << A[i] << endl;
+    cout << A[i] << " " << A_len[i] << endl;
   }
   cout << "---------" << endl;
 
   // do insertion sort from the rightmost digit to leftmost digit
-  for (int d = m - 1; d >= 0; d--)
+  // index [m - 1] is 0, start from m - 2 to 0 to sort
+  for (int d = m - 2; d >= 0; d--)
   {
     insertion_sort_digit(A, A_len, 0, n - 1, d);
   }
@@ -217,7 +218,7 @@ void radix_sort_is(char **A, int *A_len, int n, int m)
   // for debugging
   for (int i = 0; i < n; i++)
   {
-    cout << A[i] << endl;
+    cout << A[i] << " " << A_len[i] << endl;
   }
   cout << "---------" << endl;
 }
@@ -227,17 +228,20 @@ void radix_sort_cs(char **A, int *A_len, int n, int m)
   // for debugging
   for (int i = 0; i < n; i++)
   {
-    cout << A[i] << endl;
+    cout << A[i] << " " << A_len[i] << endl;
   }
   cout << "---------" << endl;
 
   char **B = new char *[n];
   int *B_len = new int[n];
 
+  // do counting sort from the rightmost digit to leftmost digit
+  // index [m - 1] is 0, start from m - 2 to 0 to sort
   for (int d = m - 2; d >= 0; d--)
   {
     counting_sort_digit(A, A_len, B, B_len, n - 1, d);
 
+    // copy B to A
     for (int x = 0; x < n; x++)
     {
       A[x] = B[x];
@@ -248,7 +252,7 @@ void radix_sort_cs(char **A, int *A_len, int n, int m)
   // for debugging
   for (int i = 0; i < n; i++)
   {
-    cout << A[i] << endl;
+    cout << A[i] << " " << A_len[i] << endl;
   }
 }
 

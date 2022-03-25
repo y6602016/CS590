@@ -325,5 +325,28 @@ void rb_tree::convert(int *array, rb_tree_node *node, int array_size, int *tree_
 // question 4
 int rb_tree::check_black_height(rb_tree_node *x)
 {
-  return 0;
+  if (x == T_nil)
+  {
+    return 0;
+  }
+
+  return check_black_height_helper(x->left); // or use right child
+}
+
+int rb_tree::check_black_height_helper(rb_tree_node *x)
+{
+  if (x == T_nil)
+  {
+    return 1;
+  }
+
+  int path_black_sum = check_black_height_helper(x->left); // or use right child
+  if (x->color == RB_BLACK)
+  {
+    return 1 + path_black_sum;
+  }
+  else
+  {
+    return path_black_sum;
+  }
 }

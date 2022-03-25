@@ -71,9 +71,9 @@ int main(int argc, char *argv[])
 
 	cout << "Timer (generate): " << t << endl;
 
-	for (int i = 0; (i < n) && (i < 20); i++)
-		cout << input_array[i] << endl;
-	cout << endl;
+	// for (int i = 0; (i < n) && (i < 20); i++)
+	// 	cout << input_array[i] << endl;
+	// cout << endl;
 
 	/*
 	 * run algorithms

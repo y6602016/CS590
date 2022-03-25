@@ -65,6 +65,7 @@ protected:
   void convert(int *, rb_tree_node *, int, int *);
 
   int check_black_height(rb_tree_node *);
+  int check_black_height_helper(rb_tree_node *);
 
   void remove_all(rb_tree_node *);
 

@@ -10,6 +10,7 @@ using namespace std;
  */
 bs_tree::bs_tree()
 {
+  T_root = NULL;
 }
 
 bs_tree::~bs_tree()
@@ -22,6 +23,9 @@ void bs_tree::insert(int key, bs_tree_i_info &t_info)
 
   z = new bs_tree_node;
   z->key = key;
+  z->p = NULL;
+  z->left = NULL;
+  z->right = NULL;
 
   insert(z, t_info);
 }
@@ -49,11 +53,11 @@ void bs_tree::insert(bs_tree_node *z, bs_tree_i_info &t_info)
       x = x->right;
     }
     else
-    { // z val = x val, return
+    { // z val = x val, record in t_info's duplicate
+      t_info.i_duplicate += 1;
       return;
     }
   }
-
   // now x = NULL and y is at the position of being the parent of z
   z->p = y;
 
@@ -79,5 +83,21 @@ void bs_tree::insert(bs_tree_node *z, bs_tree_i_info &t_info)
 // question 2
 int bs_tree::convert(int *array, int n)
 {
-  return n;
+  int tree_size = 0;
+  bs_tree_node *x;
+  x = T_root;
+  convert(array, x, n, &tree_size);
+  return tree_size;
+}
+
+void bs_tree::convert(int *array, bs_tree_node *node, int array_size, int *tree_size)
+{
+  if (node != NULL)
+  {
+    convert(array, node->left, array_size, tree_size);
+    array[*tree_size] = node->key;
+    *tree_size += 1;
+    cout << node->key << endl;
+    convert(array, node->right, array_size, tree_size);
+  }
 }

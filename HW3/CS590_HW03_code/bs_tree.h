@@ -34,6 +34,7 @@ public:
 
 protected:
   void insert(bs_tree_node *, bs_tree_i_info &);
+  void convert(int *, bs_tree_node *, int, int *);
 };
 
 #endif

@@ -7,8 +7,8 @@
 #include "timer.h"
 #include "random_generator.h"
 
-int main(int argc, char* argv[])
-{ 
+int main(int argc, char *argv[])
+{
 	random_generator rg;
 	rb_tree_i_info rb_info;
 	bs_tree_i_info bs_info;
@@ -18,11 +18,11 @@ int main(int argc, char* argv[])
 	bs_info.reset();
 	rb_info.reset();
 
-/*
- * check arguments
- */
+	/*
+	 * check arguments
+	 */
 	if (argc > 1)
-	{ 
+	{
 		n = atoi(argv[1]);
 		n = (n < 1) ? 1 : n;
 	}
@@ -49,13 +49,12 @@ int main(int argc, char* argv[])
 	else
 		tree = 0;
 
-
-/*
- * allocated and generate integer array
- */
+	/*
+	 * allocated and generate integer array
+	 */
 	rb_tree rb;
 	bs_tree bs;
-	int* input_array;
+	int *input_array;
 	int bh;
 
 	t.start();
@@ -72,13 +71,13 @@ int main(int argc, char* argv[])
 
 	cout << "Timer (generate): " << t << endl;
 
-	// for (int i = 0; (i < n) && (i < 20); i++)
-	// 	cout << input_array[i] << endl;
-	// cout << endl;
+	for (int i = 0; (i < n) && (i < 20); i++)
+		cout << input_array[i] << endl;
+	cout << endl;
 
-/*
- * run algorithms
- */
+	/*
+	 * run algorithms
+	 */
 	if (tree == 0)
 	{
 		cout << "Running sort using BS trees: " << endl;
@@ -114,18 +113,18 @@ int main(int argc, char* argv[])
 		cout << "Time (black height test): " << t << endl;
 	}
 
-/*
- * check output
- */
+	/*
+	 * check output
+	 */
 	if (tree == 0)
 	{
-		//bs.output();
+		// bs.output();
 
 		cout << "Duplicates: " << bs_info.i_duplicate << endl;
 	}
 	else
 	{
-		//rb.output();
+		// rb.output();
 
 		cout << "Case 1: " << rb_info.i_case_1 << endl;
 		cout << "Case 2: " << rb_info.i_case_2 << endl;
@@ -135,24 +134,22 @@ int main(int argc, char* argv[])
 		cout << "Duplicates: " << rb_info.i_duplicate << endl;
 	}
 
-	if (check_sorted(input_array, 0, n-1))
+	if (check_sorted(input_array, 0, n - 1))
 		cout << "The output is sorted!" << endl;
 	else
 		cout << "ERROR: The output is not sorted!" << endl;
 
-	//rb.inorder_output();
-	//rb.inorder_output();
-
+	// rb.inorder_output();
+	// rb.inorder_output();
 
 	// for (int i = 0; (i < n) && (i < 20); i++)
 	// 	cout << input_array[i] << endl;
 	// cout << endl;
 
-/*
- * free allocated storage
- */
+	/*
+	 * free allocated storage
+	 */
 	delete[] input_array;
 
 	return 0;
 }
-

@@ -47,6 +47,9 @@ void rb_tree::insert(int key, rb_tree_i_info &t_info)
   z = new rb_tree_node;
   z->color = RB_BLACK;
   z->key = key;
+  z->p = T_nil;
+  z->left = T_nil;
+  z->right = T_nil;
 
   insert(z, t_info);
 } /*>>>*/
@@ -69,8 +72,15 @@ void rb_tree::insert(rb_tree_node *z, rb_tree_i_info &t_info)
 
     if (z->key < x->key)
       x = x->left;
-    else
+    else if (z->key > x->key)
+    { // z val > x val, go left
       x = x->right;
+    }
+    else
+    { // z val = x val
+      t_info.i_duplicate += 1;
+      return;
+    }
   }
 
   z->p = y;

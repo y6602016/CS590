@@ -47,9 +47,6 @@ void rb_tree::insert(int key, rb_tree_i_info &t_info)
   z = new rb_tree_node;
   z->color = RB_BLACK;
   z->key = key;
-  z->p = T_nil;
-  z->left = T_nil;
-  z->right = T_nil;
 
   insert(z, t_info);
 } /*>>>*/
@@ -121,6 +118,7 @@ void rb_tree::insert_fixup(rb_tree_node *&z, rb_tree_i_info &t_info)
 
       if (y->color == RB_RED)
       {
+        t_info.i_case_1 += 1;   // record case 1
         z->p->color = RB_BLACK; // Case 1
         y->color = RB_BLACK;
         z->p->p->color = RB_RED;
@@ -130,11 +128,15 @@ void rb_tree::insert_fixup(rb_tree_node *&z, rb_tree_i_info &t_info)
       {
         if (z == z->p->right)
         {
-          z = z->p; // Case 2
+          t_info.i_case_2 += 1;      // record case 2
+          t_info.i_left_rotate += 1; // record left rotate
+          z = z->p;                  // Case 2
           left_rotate(z);
         }
 
-        z->p->color = RB_BLACK; // Case 3
+        t_info.i_case_3 += 1;       // record case 3
+        t_info.i_right_rotate += 1; // record right rotate
+        z->p->color = RB_BLACK;     // Case 3
         z->p->p->color = RB_RED;
         right_rotate(z->p->p);
       }
@@ -146,6 +148,7 @@ void rb_tree::insert_fixup(rb_tree_node *&z, rb_tree_i_info &t_info)
 
       if (y->color == RB_RED)
       {
+        t_info.i_case_1 += 1;   // record case 1
         z->p->color = RB_BLACK; // Case 1
         y->color = RB_BLACK;
         z->p->p->color = RB_RED;
@@ -155,11 +158,15 @@ void rb_tree::insert_fixup(rb_tree_node *&z, rb_tree_i_info &t_info)
       {
         if (z == z->p->left)
         {
-          z = z->p; // Case 2
+          t_info.i_case_2 += 1;       // record case 2
+          t_info.i_right_rotate += 1; // record right rotate
+          z = z->p;                   // Case 2
           right_rotate(z);
         }
 
-        z->p->color = RB_BLACK; // Case 3
+        t_info.i_case_3 += 1;      // record case 3
+        t_info.i_left_rotate += 1; // record left rotate
+        z->p->color = RB_BLACK;    // Case 3
         z->p->p->color = RB_RED;
         left_rotate(z->p->p);
       }
@@ -297,7 +304,22 @@ void rb_tree::remove_all(rb_tree_node *x)
 // question 2
 int rb_tree::convert(int *array, int n)
 {
-  return n;
+  int tree_size = 0;
+  rb_tree_node *x;
+  x = T_root;
+  convert(array, x, n, &tree_size);
+  return tree_size;
+}
+
+void rb_tree::convert(int *array, rb_tree_node *node, int array_size, int *tree_size)
+{
+  if (node != T_nil)
+  {
+    convert(array, node->left, array_size, tree_size);
+    array[*tree_size] = node->key;
+    *tree_size += 1;
+    convert(array, node->right, array_size, tree_size);
+  }
 }
 
 // question 4

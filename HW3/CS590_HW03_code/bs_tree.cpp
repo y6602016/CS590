@@ -24,8 +24,6 @@ void bs_tree::insert(int key, bs_tree_i_info &t_info)
   z = new bs_tree_node;
   z->key = key;
   z->p = NULL;
-  z->left = NULL;
-  z->right = NULL;
 
   insert(z, t_info);
 }
@@ -76,6 +74,9 @@ void bs_tree::insert(bs_tree_node *z, bs_tree_i_info &t_info)
       y->right = z; // otherwise z is y's right child
     }
   }
+
+  z->left = NULL;
+  z->right = NULL;
 }
 
 // TODO: modified inorder tree walk method to save the
@@ -97,7 +98,6 @@ void bs_tree::convert(int *array, bs_tree_node *node, int array_size, int *tree_
     convert(array, node->left, array_size, tree_size);
     array[*tree_size] = node->key;
     *tree_size += 1;
-    cout << node->key << endl;
     convert(array, node->right, array_size, tree_size);
   }
 }

@@ -10,11 +10,23 @@ using namespace std;
  */
 bs_tree::bs_tree()
 {
-  T_root = NULL;
+  T_root = nullptr;
 }
 
 bs_tree::~bs_tree()
 {
+  remove_all(T_root);
+}
+
+void bs_tree::remove_all(bs_tree_node *x)
+{
+  if (x != nullptr)
+  {
+    remove_all(x->left);
+    remove_all(x->right);
+
+    delete x;
+  }
 }
 
 void bs_tree::insert(int key, bs_tree_i_info &t_info)
@@ -23,7 +35,7 @@ void bs_tree::insert(int key, bs_tree_i_info &t_info)
 
   z = new bs_tree_node;
   z->key = key;
-  z->p = NULL;
+  z->p = nullptr;
 
   insert(z, t_info);
 }
@@ -35,11 +47,11 @@ void bs_tree::insert(bs_tree_node *z, bs_tree_i_info &t_info)
   bs_tree_node *y;
 
   // initialize y = NULL and x = root
-  y = NULL;
+  y = nullptr;
   x = T_root;
 
   // traverse x to the correct position to insert z
-  while (x != NULL)
+  while (x != nullptr)
   {
     y = x;
     if (z->key < x->key)
@@ -59,7 +71,7 @@ void bs_tree::insert(bs_tree_node *z, bs_tree_i_info &t_info)
   // now x = NULL and y is at the position of being the parent of z
   z->p = y;
 
-  if (y == NULL)
+  if (y == nullptr)
   { // if y = NULL, it's an empty tree, set z as the root
     T_root = z;
   }
@@ -75,8 +87,8 @@ void bs_tree::insert(bs_tree_node *z, bs_tree_i_info &t_info)
     }
   }
 
-  z->left = NULL;
-  z->right = NULL;
+  z->left = nullptr;
+  z->right = nullptr;
 }
 
 // TODO: modified inorder tree walk method to save the
@@ -93,7 +105,7 @@ int bs_tree::convert(int *array, int n)
 
 void bs_tree::convert(int *array, bs_tree_node *node, int array_size, int *tree_size)
 {
-  if (node != NULL)
+  if (node != nullptr)
   {
     convert(array, node->left, array_size, tree_size);
     array[*tree_size] = node->key;

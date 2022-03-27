@@ -33,6 +33,7 @@ public:
   int convert(int *, int);
 
 protected:
+  void remove_all(bs_tree_node *);
   void insert(bs_tree_node *, bs_tree_i_info &);
   void convert(int *, bs_tree_node *, int, int *);
 };

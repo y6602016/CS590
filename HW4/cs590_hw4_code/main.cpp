@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 	X = rg.random_string_m(n, 4);
 	Y = rg.random_string_m(m, 4);
 
-		// Inputs for testing
+	// Inputs for testing
 	// char a[11] = {'c', 'a', 'c', 'a', 'c', 'c', 'c', 'b', 'a', 'b', 0};
 	// char b[11] = {'b', 'c', 'c', 'a', 'd', 'a', 'a', 'd', 'c', 'c', 0};
 
@@ -68,6 +68,11 @@ int main(int argc, char *argv[])
 
 	// char a[11] = {'c', 'a', 'a', 'c', 'b', 'd', 'a', 'c', 'c', 'a', 0};
 	// char b[11] = {'b', 'c', 'c', 'b', 'c', 'd', 'c', 'c', 'b', 'a', 0};
+
+	// char a[11] = {'d', 'c', 'd', 'c', 'b', 'a', 'c', 'b', 'b', 'b', 0};
+	// char b[11] = {'a', 'c', 'd', 'c', 'c', 'a', 'b', 'd', 'b', 'b', 0};
+	// char a[9] = {'a', 'b', 'b', 'a', 'b', 'a', 'b', 'a', 0};
+	// char b[10] = {'b', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 0};
 
 	// X = a;
 	// Y = b;
